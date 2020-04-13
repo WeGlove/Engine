@@ -1,6 +1,6 @@
-from src import Shapes
+import Shapes
 import numpy
-from src.Shapes.FinitelyBounded.ShapeCollections.Std.AAB import AAB
+from Shapes.FinitelyBounded.ShapeCollections.Std.AAB import AAB
 
 
 class AABB(AAB):
@@ -112,6 +112,7 @@ class AABB(AAB):
         combination = boxes[0]
         if len(boxes) > 1:
             combination.extend(boxes[1:])
+        return combination
 
     @staticmethod
     def from_coordinates(down_left, up_right):

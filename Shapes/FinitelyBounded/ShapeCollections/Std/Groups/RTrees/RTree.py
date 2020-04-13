@@ -1,6 +1,6 @@
-from src.Shapes.FinitelyBounded.ShapeCollections.Std.Groups.Shallow import Shallow
+from Shapes.FinitelyBounded.ShapeCollections.Std.Groups.Shallow import Shallow
 from abc import abstractmethod
-from src import Shapes
+import Shapes
 
 
 class RTree(Shallow):

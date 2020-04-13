@@ -1,4 +1,4 @@
-from src.Shapes.FinitelyBounded.ShapeCollections.Std.AAB import AAB
+from Shapes.FinitelyBounded.ShapeCollections.Std.AAB import AAB
 import numpy
 import math
 

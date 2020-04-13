@@ -1,7 +1,7 @@
-from src import Shapes
-from src.Shapes.FinitelyBounded.ShapeCollections.Std.Simple import Simple
+import Shapes
+from Shapes.FinitelyBounded.ShapeCollections.Std.Simple import Simple
 import numpy
-from src import Intersection
+import Intersection
 
 
 class AAB(Simple):
