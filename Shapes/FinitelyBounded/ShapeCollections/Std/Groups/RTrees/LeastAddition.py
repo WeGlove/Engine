@@ -19,7 +19,7 @@ class LeastAddition(RTree):
                 node_index = i
         self.nodes[node_index].add(node)
 
-    def _split_heuristic(self, node):
+    def _split_heuristic(self):
         absolvents = self.nodes
         self.nodes = []
         for i in range(self.FILL):

@@ -24,8 +24,9 @@ class RTree(Shallow):
     def add(self, node):
         if self.leaf:
             if len(self.nodes) == self.FILL:
-                self._split_heuristic(node)
+                self._split_heuristic()
                 self.leaf = False
+                self._insert_heuristic(node)
             else:
                 self.nodes.append(node)
         else:
@@ -38,7 +39,7 @@ class RTree(Shallow):
         pass
 
     @abstractmethod
-    def _split_heuristic(self, node):
+    def _split_heuristic(self):
         pass
 
     def delete(self, identifier):
