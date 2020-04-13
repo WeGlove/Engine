@@ -1,5 +1,5 @@
-from Shapes.FinitelyBounded.ShapeCollections.Std.Groups.Group import Group
-import Shapes
+from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Groups.Group import Group
+from Engine import Shapes
 
 class Shallow(Group):
 

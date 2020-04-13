@@ -1,4 +1,4 @@
-from Shapes.FinitelyBounded.ShapeCollections.Std.Simple import Simple
+from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Simple import Simple
 from abc import abstractmethod
 
 

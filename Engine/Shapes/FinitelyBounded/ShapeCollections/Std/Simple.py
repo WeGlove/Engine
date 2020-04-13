@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from GameObject import GameObject
+from Engine.GameObject import GameObject
 
 
 class Simple(GameObject):

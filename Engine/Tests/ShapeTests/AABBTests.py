@@ -1,5 +1,5 @@
-import Shapes
-from Shapes.FinitelyBounded.Factories.StdFactory import StdFactroy
+from Engine import Shapes
+from Engine.Shapes.FinitelyBounded.Factories.StdFactory import StdFactroy
 Shapes.set_factory(StdFactroy)
 import unittest
 import numpy

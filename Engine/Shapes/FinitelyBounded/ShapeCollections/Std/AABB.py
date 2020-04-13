@@ -1,6 +1,6 @@
-import Shapes
+from Engine import Shapes
 import numpy
-from Shapes.FinitelyBounded.ShapeCollections.Std.AAB import AAB
+from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.AAB import AAB
 
 
 class AABB(AAB):

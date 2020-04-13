@@ -1,5 +1,5 @@
-from Shapes.FinitelyBounded.ShapeCollections.Std.Groups.RTrees.RTree import RTree
-import Shapes
+from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Groups.RTrees.RTree import RTree
+from Engine import Shapes
 
 
 class LeastAddition(RTree):
