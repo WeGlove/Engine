@@ -28,7 +28,7 @@ class AAB(Simple):
         self.right = position[0] + self.width / 2
         self.left = position[0] - self.width / 2
 
-    def intersect(self, ray, parents=None):
+    def intersect(self, ray):
         up = self.up + ray.error
         down = self.down - ray.error
 
@@ -38,19 +38,19 @@ class AAB(Simple):
         if ray.direction[0] == 0:
             if ray.direction[1] == 0:
                 if down <= ray.position[1] <= up and left <= ray.position[0] <= right:
-                    return [Intersection.Intersection(0, numpy.array([0, 0]), self, parents),
-                            Intersection.Intersection(0, numpy.array([0, 0]), self, parents)]
+                    return [Intersection.Intersection(0, numpy.array([0, 0]), self),
+                            Intersection.Intersection(0, numpy.array([0, 0]), self)]
                 else:
                     return []
             else:
                 t0y = (down - ray.position[1]) / ray.direction[1]
                 t1y = (up - ray.position[1]) / ray.direction[1]
                 if left <= ray.position[0] <= right:
-                    return [Intersection.Intersection(t0y, numpy.array([0, -1]), self, parents),
-                            Intersection.Intersection(t1y, numpy.array([0, 1]), self, parents)] \
+                    return [Intersection.Intersection(t0y, numpy.array([0, -1]), self),
+                            Intersection.Intersection(t1y, numpy.array([0, 1]), self)] \
                             if t0y < t1y else \
-                           [Intersection.Intersection(t1y, numpy.array([0, 1]), self, parents),
-                            Intersection.Intersection(t0y, numpy.array([0, -1]), self, parents)]
+                           [Intersection.Intersection(t1y, numpy.array([0, 1]), self),
+                            Intersection.Intersection(t0y, numpy.array([0, -1]), self)]
                 else:
                     return []
         else:
@@ -58,11 +58,11 @@ class AAB(Simple):
                 t0x = (left - ray.position[0]) / ray.direction[0]
                 t1x = (right - ray.position[0]) / ray.direction[0]
                 if left <= ray.position[0] <= right:
-                    return [Intersection.Intersection(t0x, numpy.array([-1, 0]), self, parents),
-                            Intersection.Intersection(t1x, numpy.array([1, 0]), self, parents)] \
+                    return [Intersection.Intersection(t0x, numpy.array([-1, 0]), self),
+                            Intersection.Intersection(t1x, numpy.array([1, 0]), self)] \
                             if t0x < t1x else \
-                           [Intersection.Intersection(t1x, numpy.array([1, 0]), self, parents),
-                            Intersection.Intersection(t0x, numpy.array([-1, 0]), self, parents)]
+                           [Intersection.Intersection(t1x, numpy.array([1, 0]), self),
+                            Intersection.Intersection(t0x, numpy.array([-1, 0]), self)]
                 else:
                     return []
 
@@ -97,8 +97,8 @@ class AAB(Simple):
             if tMin > tMax:
                 tMin, tMax = tMax, tMin
                 normalMin, normalMax = normalMax, normalMin
-            intersections.extend([Intersection.Intersection(tMin, normalMin, self, parents),
-                                  Intersection.Intersection(tMax, normalMax, self, parents)])
+            intersections.extend([Intersection.Intersection(tMin, normalMin, self),
+                                  Intersection.Intersection(tMax, normalMax, self)])
             return intersections
 
     def is_in(self, point):
