@@ -6,14 +6,14 @@ from Engine import Shapes
 class RTree(Shallow):
 
     FILL = 4
-    MIN_FILL = 2
+    MIN_FILL = 1
 
     def __init__(self, nodes, head=True, identifier=-1):
         self.bounding_box = Shapes.factory.get_AABB.empty(identifier)
         self.head = head
         self.leaf = True
+        self.identifiers = []
         Shallow.__init__(self, nodes, identifier)
-
 
     def is_leaf(self):
         return self.leaf
@@ -22,6 +22,7 @@ class RTree(Shallow):
         return self.head
 
     def add(self, node):
+        self.identifiers.append(hash(node))
         if self.leaf:
             if len(self.nodes) == self.FILL:
                 self._split_heuristic()
@@ -44,14 +45,19 @@ class RTree(Shallow):
 
     def delete(self, identifier):
         if self.leaf:
-            self.nodes = [node for node in self.nodes if hash(node) == identifier]
+            if identifier in self.identifiers:
+                self.identifiers.remove(identifier)
+            super().delete(identifier)
         else:
-            for node in self.nodes:
-                node.delete(identifier)
-                if len(node.nodes) <= self.MIN_FILL:
-                    absolvents = node.nodes
-                    for absolvent in absolvents:
-                        self.add(absolvent)
-        self.bounding_box = Shapes.factory.get_AABB.combine([node.get_bounding_box() for node in self.nodes])
+            if identifier in self.identifiers:
+                if identifier in self.identifiers:
+                    self.identifiers.remove(identifier)
+                for node in self.nodes:
+                    node.delete(identifier)
+                    if len(node.nodes) < self.MIN_FILL:
+                        absolvents = node.nodes
+                        for absolvent in absolvents:
+                            self.add(absolvent)
+                self.bounding_box = Shapes.factory.get_AABB.combine([node.get_bounding_box() for node in self.nodes])
 
 

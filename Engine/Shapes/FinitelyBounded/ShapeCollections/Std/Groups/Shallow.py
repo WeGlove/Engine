@@ -43,5 +43,8 @@ class Shallow(Group):
         self.bounding_box.extend(node.get_bounding_box())
 
     def delete(self, identifier):
-        self.nodes = [leaf for leaf in self.nodes if hash(leaf) == identifier]
-        self.bounding_box = Shapes.factory.get_AABB.combine([node.get_bounding_box() for node in self.nodes])
+        self.nodes = [leaf for leaf in self.nodes if hash(leaf) != identifier]
+        if len(self.nodes) == 0:
+            self.bounding_box = Shapes.factory.get_AABB.empty()
+        else:
+            self.bounding_box = Shapes.factory.get_AABB.combine([node.get_bounding_box() for node in self.nodes])
