@@ -1,5 +1,5 @@
 import pygame
-from src.Backends.Peripherals.Mouse import Mouse
+from Engine.Peripherals.Mouse import Mouse
 
 
 class Pygame_Mouse(Mouse):

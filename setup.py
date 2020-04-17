@@ -7,5 +7,5 @@ setuptools.setup(
     author_email="tobias.jungbluth.tj@gmail.com",
     description="A small Engine",
     url="https://github.com/WeGlove/Engine.git",
-    packages=["Engine"],
+    packages=setuptools.find_packages(),
 )
