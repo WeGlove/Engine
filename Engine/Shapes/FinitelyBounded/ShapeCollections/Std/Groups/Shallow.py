@@ -48,3 +48,6 @@ class Shallow(Group):
             self.bounding_box = Shapes.factory.get_AABB.empty()
         else:
             self.bounding_box = Shapes.factory.get_AABB.combine([node.get_bounding_box() for node in self.nodes])
+
+    def get_leaves(self):
+        return self.nodes

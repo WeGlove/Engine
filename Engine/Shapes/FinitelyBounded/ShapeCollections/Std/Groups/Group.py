@@ -22,3 +22,7 @@ class Group(Simple):
     @abstractmethod
     def delete(self, identifier):
         pass
+
+    @abstractmethod
+    def get_leaves(self):
+        pass

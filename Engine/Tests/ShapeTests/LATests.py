@@ -31,3 +31,9 @@ class LATests(unittest.TestCase):
         LA.delete(Shapes.factory.get_LA.FILL)
         for i in range(Shapes.factory.get_LA.FILL):
             self.assertEqual(1, len(LA.nodes[i].nodes))
+
+    def test_get_leaves(self):
+        LA = Shapes.factory.get_LA([StdFactroy.get_AABB(numpy.array([0, 0]), 10, 10, identifier=i) for i in
+                                    range(10)])
+        for leaf in LA.get_leaves():
+            print(leaf)

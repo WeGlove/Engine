@@ -60,4 +60,12 @@ class RTree(Shallow):
                             self.add(absolvent)
                 self.bounding_box = Shapes.factory.get_AABB.combine([node.get_bounding_box() for node in self.nodes])
 
+    def get_leaves(self):
+        if self.leaf:
+            return self.nodes
+        else:
+            leaves = []
+            for node in self.nodes:
+                leaves += node.get_leaves()
+            return leaves
 
