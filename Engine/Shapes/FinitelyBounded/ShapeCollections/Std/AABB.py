@@ -1,4 +1,4 @@
-from Engine import Shapes
+import Engine
 import numpy
 from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.AAB import AAB
 
@@ -118,7 +118,7 @@ class AABB(AAB):
     @staticmethod
     def from_coordinates(down_left, up_right):
         position = down_left + (up_right - down_left) / 2
-        return Shapes.factory.get_AABB(position, abs(up_right[0] - down_left[0]), abs(up_right[1] - down_left[1]))
+        return Engine.shape_factory.AABB(position, abs(up_right[0] - down_left[0]), abs(up_right[1] - down_left[1]))
 
     def __str__(self):
         return f"AABB: ID:{self.identifier} Pos:{self.position} Dim:({self.width} {self.height}) Empty:{self.empty}"

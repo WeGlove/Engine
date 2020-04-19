@@ -7,10 +7,10 @@ from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Groups.RTrees.LeastAddit
 
 class StdFactroy(ShapeFactory):
 
-    get_AAB = AAB
+    AAB = AAB
 
-    get_AABB = AABB
+    AABB = AABB
 
-    get_Rect = Rectangle
+    Rectangle = Rectangle
 
-    get_LA = LeastAddition
+    LeastAddition = LeastAddition

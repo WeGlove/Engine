@@ -113,3 +113,6 @@ class AAB(Simple):
 
     def get_bounding_box(self):
         return Shapes.factory.get_AABB(self.position, self.width, self.height)
+
+    def __str__(self):
+        return f"AAB: ID:{self.identifier} Pos:{self.position} Dim:({self.width} {self.height})"
