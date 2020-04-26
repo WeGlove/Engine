@@ -1,5 +1,5 @@
 from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Groups.RTrees.RTree import RTree
-from Engine import Shapes
+import Engine
 
 
 class LeastAddition(RTree):
@@ -12,7 +12,7 @@ class LeastAddition(RTree):
         highest_area = -1
         box = node.get_bounding_box()
         for i in range(len(self.nodes)):
-            overlap_box = Shapes.factory.get_AABB.overlap(box, self.nodes[i].get_bounding_box())
+            overlap_box = Engine.shape_factory.AABB.overlap(box, self.nodes[i].get_bounding_box())
             area = overlap_box.get_surface_area()
             if area > highest_area:
                 highest_area = area

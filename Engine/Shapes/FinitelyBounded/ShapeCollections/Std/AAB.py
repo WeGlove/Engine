@@ -1,4 +1,4 @@
-from Engine import Shapes
+import Engine
 from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Simple import Simple
 import numpy
 from Engine import Intersection
@@ -112,7 +112,7 @@ class AAB(Simple):
             return []
 
     def get_bounding_box(self):
-        return Shapes.factory.get_AABB(self.position, self.width, self.height)
+        return Engine.shape_factory.AABB(self.position, self.width, self.height)
 
     def __str__(self):
         return f"AAB: ID:{self.identifier} Pos:{self.position} Dim:({self.width} {self.height})"

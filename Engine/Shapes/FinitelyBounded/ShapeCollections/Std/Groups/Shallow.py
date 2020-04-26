@@ -1,11 +1,12 @@
 from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Groups.Group import Group
-from Engine import Shapes
+import Engine
+
 
 class Shallow(Group):
 
     def __init__(self, leaves, identifier=-1):
         Group.__init__(self, identifier)
-        self.bounding_box = Shapes.factory.get_AABB.empty(identifier)
+        self.bounding_box = Engine.shape_factory.AABB.empty(identifier)
         self.nodes = []
         for leaf in leaves:
             self.add(leaf)
@@ -45,9 +46,9 @@ class Shallow(Group):
     def delete(self, identifier):
         self.nodes = [leaf for leaf in self.nodes if hash(leaf) != identifier]
         if len(self.nodes) == 0:
-            self.bounding_box = Shapes.factory.get_AABB.empty()
+            self.bounding_box = Engine.shape_factory.AABB.empty()
         else:
-            self.bounding_box = Shapes.factory.get_AABB.combine([node.get_bounding_box() for node in self.nodes])
+            self.bounding_box = Engine.shape_factory.AABB.combine([node.get_bounding_box() for node in self.nodes])
 
     def get_leaves(self):
         return self.nodes
