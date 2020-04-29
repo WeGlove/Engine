@@ -17,12 +17,31 @@ class LeastAddition(RTree):
             if area > highest_area:
                 highest_area = area
                 node_index = i
-        self.nodes[node_index].add(node)
+        return [self.nodes[node_index]]
 
     def _split_heuristic(self):
         absolvents = self.nodes
         self.nodes = []
-        for i in range(self.FILL):
-            self.nodes.append(LeastAddition([absolvents[i]], head=False, identifier=i))
+        for i in range(self.MIN_FILL):
+            self.nodes.append(LeastAddition([], head=False, identifier=i))
+        for absolvent in absolvents:
+            area, add_node = None, None
+            for node in self.nodes:
+                abbox = absolvent.get_bounding_box()
+                nbbox = node.get_bounding_box()
+                overlap_box = Engine.shape_factory.AABB.overlap(abbox, nbbox)
+                new_area = overlap_box.get_surface_area()
+                if area is None:
+                    area = new_area
+                    add_node = node
+                elif area == new_area:
+                    if len(add_node.identifiers) > len(node.identifiers):
+                        area = new_area
+                        add_node = node
+                else:
+                    area = new_area
+                    add_node = node
+
+            add_node.add(absolvent)
         self.leaf = False
 

@@ -60,6 +60,9 @@ class AABB(AAB):
 
     @staticmethod
     def overlap(first_box, second_box):
+        if first_box.empty or second_box.empty:
+            return AABB.empty()
+
         first_line = numpy.array([first_box.left, first_box.right])
         second_line = numpy.array([second_box.down, second_box.up])
         horizontal_overlap = AABB.line_overlap(first_line, second_line)
