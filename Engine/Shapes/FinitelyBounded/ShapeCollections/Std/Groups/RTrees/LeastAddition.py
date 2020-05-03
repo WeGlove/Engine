@@ -14,7 +14,7 @@ class LeastAddition(RTree):
         for i in range(len(self.nodes)):
             overlap_box = Engine.shape_factory.AABB.overlap(box, self.nodes[i].get_bounding_box())
             area = overlap_box.get_surface_area()
-            if area > highest_area:
+            if area > highest_area or (area == highest_area and len(self.nodes[i].identifiers) > len(self.nodes[node_index].identifiers)):
                 highest_area = area
                 node_index = i
         return [self.nodes[node_index]]

@@ -63,3 +63,24 @@ class AABBTests(unittest.TestCase):
         line = factory.AABB.line_overlap(lineA, lineB)
         self.assertEqual(line[0], 0, f"Expected 0 got {line[0]}")
         self.assertEqual(line[1], 1, f"Expected 0 got {line[1]}")
+
+    def test_extend_euqal(self):
+        boxA = StdFactroy.AABB(numpy.array([0,0]), 10, 10)
+        boxB = StdFactroy.AABB(numpy.array([0,0]), 10, 10)
+        boxA.extend([boxB])
+
+        self.assertTrue(boxA.equal(boxB))
+
+    def test_extend_empty(self):
+        boxA = StdFactroy.AABB(numpy.array([0,0]), 10, 10)
+        boxB = StdFactroy.AABB.empty()
+        boxA.extend([boxB])
+
+        self.assertTrue(boxA.equal(boxA))
+
+    def test_empty_extend(self):
+        boxA = StdFactroy.AABB(numpy.array([0,0]), 10, 10)
+        boxB = StdFactroy.AABB.empty()
+        boxB.extend([boxA])
+
+        self.assertTrue(boxB.equal(boxA))

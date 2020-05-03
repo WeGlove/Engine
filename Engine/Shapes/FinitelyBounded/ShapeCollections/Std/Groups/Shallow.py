@@ -12,10 +12,13 @@ class Shallow(Group):
             self.add(leaf)
 
     def intersect(self, ray):
-        intersections = []
-        for leaf in self.nodes:
-            intersections += leaf.intersect(ray)
-        return intersections
+        if len(self.bounding_box.intersect(ray)) > 0:
+            intersections = []
+            for leaf in self.nodes:
+                intersections += leaf.intersect(ray)
+            return intersections
+        else:
+            return []
 
     def is_in(self, point):
         for leaf in self.nodes:
@@ -41,7 +44,7 @@ class Shallow(Group):
 
     def add(self, node):
         self.nodes.append(node)
-        self.bounding_box.extend(node.get_bounding_box())
+        self.bounding_box.extend([node.get_bounding_box()])
 
     def delete(self, identifier):
         self.nodes = [leaf for leaf in self.nodes if hash(leaf) != identifier]

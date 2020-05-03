@@ -36,3 +36,5 @@ class LATests(unittest.TestCase):
                                     range(10)])
         for leaf in LA.get_leaves():
             print(leaf)
+
+

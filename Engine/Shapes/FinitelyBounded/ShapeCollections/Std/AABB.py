@@ -15,27 +15,24 @@ class AABB(AAB):
 
         for box in boxes + [self]:
             if not box.empty:
-                if self.empty:
-                    self.override(box)
+                a, b = box.to_coordinates()
+                if down_left is None:
+                    down_left = a
                 else:
-                    a, b = box.to_coordinates()
-                    if down_left is None:
-                        down_left = a
-                    else:
-                        if down_left[0] > a[0]:
-                            down_left[0] = a[0]
-                        if down_left[1] > a[1]:
-                            down_left[1] = a[1]
+                    if down_left[0] > a[0]:
+                        down_left[0] = a[0]
+                    if down_left[1] > a[1]:
+                        down_left[1] = a[1]
 
-                    if up_right is None:
-                        up_right = b
-                    else:
-                        if up_right[0] < b[0]:
-                            up_right[0] = b[0]
-                        if up_right[1] < b[1]:
-                            up_right[1] = b[1]
+                if up_right is None:
+                    up_right = b
+                else:
+                    if up_right[0] < b[0]:
+                        up_right[0] = b[0]
+                    if up_right[1] < b[1]:
+                        up_right[1] = b[1]
 
-        if not self.empty:
+        if down_left is not None and up_right is not None:
             self.override(self.from_coordinates(down_left, up_right))
 
     def override(self, box):
@@ -43,6 +40,10 @@ class AABB(AAB):
         self.width = box.width
         self.height = box.height
         self.empty = box.empty
+        self.up = box.up
+        self.left = box.left
+        self.down = box.down
+        self.right = box.right
 
     def to_coordinates(self):
         """
@@ -77,6 +78,9 @@ class AABB(AAB):
 
         return AABB.from_coordinates(numpy.array([horizontal_overlap[0], vertical_overlap[0]]),
                                      numpy.array([horizontal_overlap[1], vertical_overlap[1]]))
+
+    def equal(self, box):
+        return all(self.position == box.position) and self.width == box.width and self.height == box.height
 
     @staticmethod
     def line_overlap(first_line, second_line):

@@ -114,5 +114,8 @@ class AAB(Simple):
     def get_bounding_box(self):
         return Engine.shape_factory.AABB(self.position, self.width, self.height)
 
+    def print_construction(self):
+        return f"AAB(numpy.array([{self.position[0]}, {self.position[1]}], {self.width}, {self.height}, {self.identifier})"
+
     def __str__(self):
         return f"AAB: ID:{self.identifier} Pos:{self.position} Dim:({self.width} {self.height})"

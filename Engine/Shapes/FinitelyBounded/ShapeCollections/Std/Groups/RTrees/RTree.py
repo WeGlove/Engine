@@ -23,16 +23,17 @@ class RTree(Shallow):
 
     def add(self, node):
         self.identifiers.append(hash(node))
+        self.bounding_box.extend([node.get_bounding_box()])
+
         if self.leaf:
             self.nodes.append(node)
             if len(self.nodes) > self.FILL:
                 self._split_heuristic()
-                self.leaf = False
         else:
-            for node in self._insert_heuristic(node):
-                node.add(node)
+            for add_node in self._insert_heuristic(node):
+                add_node.add(node)
 
-        self.bounding_box.extend([node.get_bounding_box()])
+
 
     @abstractmethod
     def _insert_heuristic(self, node):
