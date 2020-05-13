@@ -62,22 +62,26 @@ class AABB(AAB):
     @staticmethod
     def overlap(first_box, second_box):
         if first_box.empty or second_box.empty:
-            return AABB.empty()
+            return AABB.empty(-1)
 
         first_line = numpy.array([first_box.left, first_box.right])
-        second_line = numpy.array([second_box.down, second_box.up])
+        second_line = numpy.array([second_box.left, second_box.right])
         horizontal_overlap = AABB.line_overlap(first_line, second_line)
         if horizontal_overlap is None:
             return AABB.empty(-1)
 
-        first_line = numpy.array([first_box.left, first_box.right])
-        second_line = numpy.array([first_box.down, first_box.up])
+        first_line = numpy.array([first_box.down, first_box.up])
+        second_line = numpy.array([second_box.down, second_box.up])
         vertical_overlap = AABB.line_overlap(first_line, second_line)
         if vertical_overlap is None:
             return AABB.empty(-1)
 
         return AABB.from_coordinates(numpy.array([horizontal_overlap[0], vertical_overlap[0]]),
                                      numpy.array([horizontal_overlap[1], vertical_overlap[1]]))
+
+    @staticmethod
+    def overlaps(first_box, second_box):
+        return not AABB.overlap(first_box, second_box).empty
 
     def equal(self, box):
         return all(self.position == box.position) and self.width == box.width and self.height == box.height

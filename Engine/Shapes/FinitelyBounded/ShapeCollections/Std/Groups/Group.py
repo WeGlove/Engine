@@ -26,3 +26,7 @@ class Group(Simple):
     @abstractmethod
     def get_leaves(self):
         pass
+
+    @abstractmethod
+    def overlaps(self, bbox):
+        pass

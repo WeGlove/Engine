@@ -55,3 +55,13 @@ class Shallow(Group):
 
     def get_leaves(self):
         return self.nodes
+
+    def overlaps(self, bbox):
+        overlaps = []
+        if self.bounding_box.overlaps(self.bounding_box, bbox):
+            for node in self.nodes:
+                node_bbox = node.get_bounding_box()
+                if node_bbox.overlaps(node_bbox, bbox):
+                    node_bbox.overlaps(node_bbox, bbox)
+                    overlaps.append(node)
+        return overlaps
