@@ -57,7 +57,7 @@ class AABB(AAB):
         if self.empty:
             return 0
         else:
-            return (self.up - self.down) * (self.right - self.left)
+            return self.width * self.height
 
     @staticmethod
     def overlap(first_box, second_box):

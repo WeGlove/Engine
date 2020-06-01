@@ -4,6 +4,7 @@ Engine.shape_factory = StdFactroy()
 factory = Engine.shape_factory
 import unittest
 import numpy
+from Engine.Ray import Ray
 
 
 class AABBTests(unittest.TestCase):
@@ -84,3 +85,11 @@ class AABBTests(unittest.TestCase):
         boxB.extend([boxA])
 
         self.assertTrue(boxB.equal(boxA))
+
+    def test_case_1(self):
+        ray = Ray(numpy.array([72,28]), numpy.array([1,-1]), error=2)
+        box = StdFactroy.AABB(numpy.array([79,24]), 10, 2)
+
+        for intersecion in box.intersect(ray):
+            print(intersecion)
+            print(numpy.array([72,28]) + ray.direction * intersecion.t)

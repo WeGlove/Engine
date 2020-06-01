@@ -70,13 +70,23 @@ class RTree(Shallow):
                         self.nodes.remove(node)
                 if len(self.nodes) < self.MIN_FILL:  # Node needs to be absolved
                     absolvents += [(False, self.nodes)]
+                    if self.head:
+                        for leaf, absolvent in absolvents:  # Integrate absolvents into node
+                            if leaf:
+                                for abs in absolvent:
+                                    self.add(abs)
+                            else:
+                                for abs in absolvent:
+                                    self.merge_tree(abs)
                 else:
                     if self.head:
                         for leaf, absolvent in absolvents:  # Integrate absolvents into node
                             if leaf:
-                                self.add(absolvent)
+                                for abs in absolvent:
+                                    self.add(abs)
                             else:
-                                self.merge_tree(absolvent)
+                                for abs in absolvent:
+                                    self.merge_tree(abs)
 
             self.bounding_box = Engine.shape_factory.AABB.combine([node.get_bounding_box() for node in self.nodes])
 
@@ -87,23 +97,27 @@ class RTree(Shallow):
         if self.leaf:
             raise Exception()
         else:
-            bbox = tree.get_bounding_box()
-            area = None
-            node_selection = None
-            for node in self.nodes:
-                node_bbox = node.get_bounding_box()
-                overlap = node_bbox.overlap(bbox)
-                new_area = overlap.surface_area()
-                if area is None or new_area < area:
-                    area = new_area
-                    node_selection = node
-            if area == 0:
-                if node_selection.leaf:
-                    self.nodes.append(tree)
-                else:
-                    for node in self._insert_heuristic(node_selection):
-                        node.add(tree)
-            self.identifiers += tree.identifiers
+            if len(self.nodes) < self.MIN_FILL:
+                self.nodes.append(tree)
+                self.bounding_box.extend([tree.get_bounding_box()])
+            else:
+                bbox = tree.get_bounding_box()
+                area = None
+                node_selection = None
+                for node in self.nodes:
+                    node_bbox = node.get_bounding_box()
+                    overlap = node_bbox.overlap(node_bbox, bbox)
+                    new_area = overlap.get_surface_area()
+                    if area is None or new_area < area:
+                        area = new_area
+                        node_selection = node
+                if area == 0:
+                    if node_selection.leaf:
+                        self.nodes.append(tree)
+                    else:
+                        for node in self._insert_heuristic(node_selection):
+                            node.add(tree)
+        self.identifiers += tree.identifiers
 
     def get_leaves(self):
         if self.leaf:

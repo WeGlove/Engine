@@ -148,11 +148,14 @@ class LA(unittest.TestCase):
             Engine.shape_factory.AAB(numpy.array([38, 47]), 10, 2, 28)
         ]
         tree = Engine.shape_factory.LeastAddition(shapes)
+        tree.delete(19)
+        tree.delete(23)
         ray = Ray(numpy.array([89.66666667, 25.33333333]), numpy.array([1, -1]), error=2)
         tree_intersections = tree.intersect(ray)
         group_intersections = []
         for shape in shapes:
-            group_intersections += shape.intersect(ray)
+            if not shape.identifier ==  19 and not shape.identifier == 23:
+                group_intersections += shape.intersect(ray)
         self.assertTrue(len(tree_intersections) == len(group_intersections),
                         f"Expected equal number of intersections for both structures. Got, tree: {len(tree_intersections)} group: {len(group_intersections)}")
 

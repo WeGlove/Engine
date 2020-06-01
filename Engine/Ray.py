@@ -1,4 +1,5 @@
 import numpy
+import math
 
 class Ray:
 
@@ -12,6 +13,9 @@ class Ray:
 
     def set_position(self, position):
         self.position = position
+
+    def get_speed(self):
+        return math.sqrt(self.direction[0]**2 + self.direction[1]**2)
 
     def negate(self):
         self.direction = -self.direction

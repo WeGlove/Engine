@@ -68,13 +68,13 @@ class AAB(Simple):
 
         tLeft = (left - ray.position[0]) / ray.direction[0]
         tRight = (right - ray.position[0]) / ray.direction[0]
-        if tLeft > tRight:
-            tLeft, tRight = tRight, tLeft
+        #if tLeft > tRight:
+        #    tLeft, tRight = tRight, tLeft
 
         tUp = (up - ray.position[1]) / ray.direction[1]
         tDown = (down - ray.position[1]) / ray.direction[1]
-        if tDown > tUp:
-            tDown, tUp = tUp, tDown
+        #if tDown > tUp:
+        #    tDown, tUp = tUp, tDown
 
         if tLeft > tUp or tDown > tRight:
             return []
