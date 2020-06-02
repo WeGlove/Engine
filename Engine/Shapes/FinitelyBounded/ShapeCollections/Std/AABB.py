@@ -87,6 +87,10 @@ class AABB(AABPrototype):
     def overlaps(first_box, second_box):
         return not AABB.overlap(first_box, second_box).empty
 
+    def overlaps_completely(self, second_box):
+        left_down, right_up = second_box.to_coordinates()
+        return self.is_in(left_down) and self.is_in(right_up)
+
     def equal(self, box):
         return all(self.position == box.position) and self.width == box.width and self.height == box.height
 
