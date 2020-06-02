@@ -1,4 +1,5 @@
 from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Groups.Group import Group
+from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.AABB import AABB
 import Engine
 
 
@@ -6,7 +7,7 @@ class Shallow(Group):
 
     def __init__(self, leaves, identifier=-1):
         Group.__init__(self, identifier)
-        self.bounding_box = Engine.shape_factory.AABB.empty(identifier)
+        self.bounding_box = AABB.empty(identifier)
         self.nodes = []
         for leaf in leaves:
             self.add(leaf)

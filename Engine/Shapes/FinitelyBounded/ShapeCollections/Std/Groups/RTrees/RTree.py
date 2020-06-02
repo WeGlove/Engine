@@ -1,4 +1,5 @@
 from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Groups.Shallow import Shallow
+from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.AABB import AABB
 from abc import abstractmethod
 import Engine
 
@@ -9,7 +10,7 @@ class RTree(Shallow):
     MIN_FILL = 2
 
     def __init__(self, nodes, head=True, identifier=-1):
-        self.bounding_box = Engine.shape_factory.AABB.empty(identifier)
+        self.bounding_box = AABB.empty(identifier)
         self.head = head
         self.leaf = True
         self.identifiers = []
@@ -88,7 +89,7 @@ class RTree(Shallow):
                                 for abs in absolvent:
                                     self.merge_tree(abs)
 
-            self.bounding_box = Engine.shape_factory.AABB.combine([node.get_bounding_box() for node in self.nodes])
+            self.bounding_box = AABB.combine([node.get_bounding_box() for node in self.nodes])
 
         if not self.head:
             return absolvents

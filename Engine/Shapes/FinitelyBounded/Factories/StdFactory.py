@@ -9,14 +9,10 @@ from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Shape import Shape
 
 class StdFactroy(ShapeFactory):
 
-    AAB = AAB
-
-    AABB = AABB
-
-    Rectangle = Rectangle
-
-    LeastAddition = LeastAddition
-
-    Shallow = Shallow
-
-    Shape = Shape
+    def __init__(self):
+        self.AAB = AAB
+        self.AABB = AABB
+        self.Rectangle = Rectangle
+        self.LeastAddition = LeastAddition
+        self.Shallow = Shallow
+        self.Shape = Shape

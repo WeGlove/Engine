@@ -1,16 +1,16 @@
 import Engine
 import numpy
-from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.AAB import AAB
+from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.AABPrototype import AABPrototype
 
 
-class AABB(AAB):
+class AABB(AABPrototype):
     """
     An Axis Aligned Bounding Box.
     Implements the same functionality as the AAB, but can also be empty.
     """
 
     def __init__(self, position, width, height, empty=False, identifier=-1):
-        AAB.__init__(self, position, width, height, identifier)
+        AABPrototype.__init__(self, position, width, height, identifier)
         self.empty = empty
 
     def extend(self, boxes):
@@ -134,6 +134,9 @@ class AABB(AAB):
     def from_coordinates(down_left, up_right):
         position = down_left + (up_right - down_left) / 2
         return Engine.shape_factory.AABB(position, abs(up_right[0] - down_left[0]), abs(up_right[1] - down_left[1]))
+
+    def get_bounding_box(self):
+        return AABB(self.position, self.width, self.height)
 
     def __str__(self):
         return f"AABB: ID:{self.identifier} Pos:{self.position} Dim:({self.width} {self.height}) Empty:{self.empty}"

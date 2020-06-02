@@ -5,7 +5,7 @@ from abc import abstractmethod
 class Group(Shape):
 
     def __init__(self, identifier=-1):
-        Simple.__init__(self, identifier)
+        Shape.__init__(self, identifier)
 
     @abstractmethod
     def is_leaf(self):
