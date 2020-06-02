@@ -137,7 +137,7 @@ class AABB(AABPrototype):
     @staticmethod
     def from_coordinates(down_left, up_right):
         position = down_left + (up_right - down_left) / 2
-        return Engine.shape_factory.AABB(position, abs(up_right[0] - down_left[0]), abs(up_right[1] - down_left[1]))
+        return AABB(position, abs(up_right[0] - down_left[0]), abs(up_right[1] - down_left[1]))
 
     def get_bounding_box(self):
         return AABB(self.position, self.width, self.height)
