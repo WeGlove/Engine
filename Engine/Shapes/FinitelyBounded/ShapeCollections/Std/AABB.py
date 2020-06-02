@@ -4,6 +4,10 @@ from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.AAB import AAB
 
 
 class AABB(AAB):
+    """
+    An Axis Aligned Bounding Box.
+    Implements the same functionality as the AAB, but can also be empty.
+    """
 
     def __init__(self, position, width, height, empty=False, identifier=-1):
         AAB.__init__(self, position, width, height, identifier)

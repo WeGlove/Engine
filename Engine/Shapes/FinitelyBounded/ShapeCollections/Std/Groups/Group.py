@@ -1,8 +1,8 @@
-from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Simple import Simple
+from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Shape import Shape
 from abc import abstractmethod
 
 
-class Group(Simple):
+class Group(Shape):
 
     def __init__(self, identifier=-1):
         Simple.__init__(self, identifier)

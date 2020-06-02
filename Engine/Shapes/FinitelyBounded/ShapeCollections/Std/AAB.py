@@ -1,13 +1,17 @@
 import Engine
-from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Simple import Simple
+from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Shape import Shape
 import numpy
 from Engine import Intersection
 
 
-class AAB(Simple):
+class AAB(Shape):
+    """
+        An Axis Aligned Box.
+        Differentiates from ABBB because it can't be empty.
+    """
 
     def __init__(self, position, width, height, identifier=-1):
-        Simple.__init__(self, identifier)
+        Shape.__init__(self, identifier)
         self.position = position
 
         self.width = width

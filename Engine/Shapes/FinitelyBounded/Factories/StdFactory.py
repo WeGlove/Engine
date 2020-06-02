@@ -4,7 +4,7 @@ from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.AABB import AABB
 from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Rectangle import Rectangle
 from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Groups.RTrees.LeastAddition import LeastAddition
 from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Groups.Shallow import Shallow
-from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Simple import Simple
+from Engine.Shapes.FinitelyBounded.ShapeCollections.Std.Shape import Shape
 
 
 class StdFactroy(ShapeFactory):
@@ -19,4 +19,4 @@ class StdFactroy(ShapeFactory):
 
     Shallow = Shallow
 
-    Simple = Simple
+    Shape = Shape
