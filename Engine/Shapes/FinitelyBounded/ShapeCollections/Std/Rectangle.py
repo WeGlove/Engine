@@ -10,16 +10,21 @@ class Rectangle(AAB):
 
         self.angle = angle
 
-        self.trans_matrix = numpy.array([math.cos(-self.angle), -math.sin(-self.angle)],
-                                        [math.sin(self.angle), math.cos(self.angle)]
-                                        )
+        # Rotates a point to the rectangle
+        self.align_matrix = self.get_rotation_matrix(self.angle)
+        self.rev_align_matrix = self.get_rotation_matrix(-self.angle)
 
     def set_angle(self, angle):
         self.angle = angle
-        self.trans_matrix = numpy.array([math.cos(-self.angle), -math.sin(-self.angle)],
-                                        [math.sin(self.angle), math.cos(self.angle)]
-                                        )
+        self.align_matrix = self.get_rotation_matrix(self.angle)
+        self.rev_align_matrix = self.get_rotation_matrix(-self.angle)
 
-    def intersect(self, ray, parents=None):
+    @staticmethod
+    def get_rotation_matrix(angle):
+        return numpy.array([numpy.array([math.cos(angle), -math.sin(angle)]),
+                            numpy.array([math.sin(angle), math.cos(angle)])]
+                           )
+
+    def intersect(self, ray):
         ray_copy = ray.copy()
-        return super().intersect(ray_copy, parents)
+        return super().intersect(ray_copy)
