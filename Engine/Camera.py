@@ -13,7 +13,9 @@ class Camera(Rectangle):
         self.resolution_y = resolution_y if resolution_y is not None else height
 
     def world_to_cam(self, position):
-        new_position = position - self.align_matrix.dot(numpy.array([self.left, self.down]) - self.position)
+        pos = numpy.array([self.left, self.down]) - self.position
+        pos_angle = self.align_matrix.dot(pos)
+        new_position = position - pos_angle
         new_position = new_position * numpy.array([self.resolution_x / self.width, self.resolution_y / self.height])
         return new_position
 
