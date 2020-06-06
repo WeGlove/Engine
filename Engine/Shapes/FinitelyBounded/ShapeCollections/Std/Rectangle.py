@@ -21,8 +21,8 @@ class Rectangle(AAB):
 
     @staticmethod
     def get_rotation_matrix(angle):
-        return numpy.array([numpy.array([math.cos(angle), -math.sin(angle)]),
-                            numpy.array([math.sin(angle), math.cos(angle)])]
+        return numpy.array([numpy.array([math.cos(angle/360*2*math.pi), -math.sin(angle/360*2*math.pi)]),
+                            numpy.array([math.sin(angle/360*2*math.pi),  math.cos(angle/360*2*math.pi)])]
                            )
 
     def intersect(self, ray):

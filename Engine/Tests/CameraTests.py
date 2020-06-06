@@ -41,7 +41,7 @@ class HashMapTests(unittest.TestCase):
         self.assertEqual(2, scalar)
 
     def test_cam_angle_90(self):
-        cam = Camera(numpy.array([10, 10]), 20, 20, -90)
-        position = cam.world_to_cam(numpy.array([0,0]))
-        self.assertEqual(0, position[0])
-        self.assertEqual(20, position[1])
+        cam = Camera(numpy.array([10, 10]), 20, 20, 0, anchor=(True, False))
+        position = cam.world_to_cam(numpy.array([0, 0]))
+        self.assertAlmostEqual(0, position[0], self.epsilon)
+        self.assertAlmostEqual(20, position[1], self.epsilon)
