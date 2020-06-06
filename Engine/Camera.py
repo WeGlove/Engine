@@ -74,6 +74,45 @@ class Camera(Rectangle):
         """
         return scalar * self.resolution_y / self.height
 
+    def cam_to_world(self, point):
+        """
+        Reverses the world_to_cam operation
+        :param point:
+        :return:
+        """
+        # Rotate the COS by the angle
+        angled_cos = self.align_matrix.dot(self.cos)
+
+        # Determine the new position of the anchor after rotating by angle
+        pos_to_anchor = self.anchor - self.position
+        pos_to_anchor_angled = numpy.dot(self.align_matrix, pos_to_anchor)
+        angled_anchor = self.position + pos_to_anchor_angled
+
+        # Stretch point back to normal
+        new_position = point * numpy.array([self.width / self.resolution_x, self.height / self.resolution_y])
+
+        # Determine the position of the point in the canon COS
+        angled_anchor_to_point = new_position.dot(numpy.transpose(angled_cos))
+        point = angled_anchor_to_point + angled_anchor
+        return point
+
+    def cam_to_world_scale_x(self, scalar):
+        """
+        Scale a scalar to the stretch of the camera in the x coordinates.
+        :param scalar:
+        :return:
+        """
+        return scalar * self.width / self.resolution_x
+
+    def cam_to_world_scale_y(self, scalar):
+        """
+        Scale a scalar to the stretch of the camera in the y coordinates.
+        :param scalar:
+        :return:
+        """
+        return scalar * self.height /  self.resolution_y
+
+
     # TODO vector to camera space
 
     def __str__(self):

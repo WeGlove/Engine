@@ -75,3 +75,18 @@ class CameraTests(unittest.TestCase):
         position = cam.world_to_cam(numpy.array([0, 0]))
         self.assertAlmostEqual(0, position[0], self.epsilon)
         self.assertAlmostEqual(20, position[1], self.epsilon)
+
+    def test_cam_back_90(self):
+        cam = Camera(numpy.array([10, 10]), 20, 20, -270)
+        position = cam.world_to_cam(numpy.array([0, 0]))
+        position = cam.cam_to_world(position)
+        self.assertAlmostEqual(0, position[0], self.epsilon)
+        self.assertAlmostEqual(0, position[1], self.epsilon)
+
+    def test_cam_back_anchor_right_up(self):
+        cam = Camera(numpy.array([10, 10]), 20, 20, 0, anchor=(False, False))
+        position = cam.world_to_cam(numpy.array([0, 0]))
+        position = cam.cam_to_world(position)
+        self.assertAlmostEqual(0, position[0], self.epsilon)
+        self.assertAlmostEqual(0, position[1], self.epsilon)
+
