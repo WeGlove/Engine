@@ -7,7 +7,7 @@ class Camera(Rectangle):
     A 2D camera. Looks at a section of a 2d plane in a canon COS
     """
 
-    def __init__(self, position: numpy.ndarray, width: int, height: int, angle: float, identifier=-1,
+    def __init__(self, position: numpy.ndarray, width: int, height: int, angle: float=0, identifier=-1,
                  resolution_x: int=None, resolution_y: int=None, anchor=None):
         """
         :param position: The middle point of the Camera
