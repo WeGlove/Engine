@@ -3,7 +3,7 @@ from Engine.Camera import Camera
 import numpy
 
 
-class HashMapTests(unittest.TestCase):
+class CameraTests(unittest.TestCase):
 
     epsilon = 10
 
@@ -40,8 +40,38 @@ class HashMapTests(unittest.TestCase):
         scalar = cam.world_to_cam_scale_x(1)
         self.assertEqual(2, scalar)
 
-    def test_cam_angle_90(self):
+    def test_cam_anchor_left_up(self):
         cam = Camera(numpy.array([10, 10]), 20, 20, 0, anchor=(True, False))
+        position = cam.world_to_cam(numpy.array([0, 0]))
+        self.assertAlmostEqual(0, position[0], self.epsilon)
+        self.assertAlmostEqual(20, position[1], self.epsilon)
+
+    def test_cam_anchor_right_down(self):
+        cam = Camera(numpy.array([10, 10]), 20, 20, 0, anchor=(False, True))
+        position = cam.world_to_cam(numpy.array([0, 0]))
+        self.assertAlmostEqual(20, position[0], self.epsilon)
+        self.assertAlmostEqual(0, position[1], self.epsilon)
+
+    def test_cam_anchor_right_up(self):
+        cam = Camera(numpy.array([10, 10]), 20, 20, 0, anchor=(False, False))
+        position = cam.world_to_cam(numpy.array([0, 0]))
+        self.assertAlmostEqual(20, position[0], self.epsilon)
+        self.assertAlmostEqual(20, position[1], self.epsilon)
+
+    def test_cam_anchor_90(self):
+        cam = Camera(numpy.array([10, 10]), 20, 20, -90)
+        position = cam.world_to_cam(numpy.array([0, 0]))
+        self.assertAlmostEqual(20, position[0], self.epsilon)
+        self.assertAlmostEqual(0, position[1], self.epsilon)
+
+    def test_cam_anchor_180(self):
+        cam = Camera(numpy.array([10, 10]), 20, 20, -180)
+        position = cam.world_to_cam(numpy.array([0, 0]))
+        self.assertAlmostEqual(20, position[0], self.epsilon)
+        self.assertAlmostEqual(20, position[1], self.epsilon)
+
+    def test_cam_anchor_270(self):
+        cam = Camera(numpy.array([10, 10]), 20, 20, -270)
         position = cam.world_to_cam(numpy.array([0, 0]))
         self.assertAlmostEqual(0, position[0], self.epsilon)
         self.assertAlmostEqual(20, position[1], self.epsilon)
